@@ -182,6 +182,10 @@ open class ESTabBarItemContentView: UIView {
             }
         }
     }
+
+    open var font: UIFont? {
+        didSet { updateLayout() }
+    }
     
     // MARK: -
     public override init(frame: CGRect) {
@@ -231,7 +235,7 @@ open class ESTabBarItemContentView: UIView {
             }
             
             if !imageView.isHidden && !titleLabel.isHidden {
-                titleLabel.font = UIFont.systemFont(ofSize: f)
+                titleLabel.font = font ?? UIFont.systemFont(ofSize: f)
                 titleLabel.sizeToFit()
                 if #available(iOS 11.0, *), isWide {
                     titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0 + (UIScreen.main.scale == 3.0 ? 14.25 : 12.25),
@@ -258,7 +262,7 @@ open class ESTabBarItemContentView: UIView {
                                               width: s,
                                               height: s)
             } else if !titleLabel.isHidden {
-                titleLabel.font = UIFont.systemFont(ofSize: f)
+                titleLabel.font = font ?? UIFont.systemFont(ofSize: f)
                 titleLabel.sizeToFit()
                 titleLabel.frame = CGRect.init(x: (w - titleLabel.bounds.size.width) / 2.0,
                                                y: (h - titleLabel.bounds.size.height) / 2.0,
